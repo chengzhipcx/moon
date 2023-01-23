@@ -1,0 +1,33 @@
+export var myMap = new Map();
+
+// 将一个新元素添加到 Map 对象
+myMap.set("初一", "1_m1.png,既朔月");
+myMap.set("初二", "1_m2.png,峨眉新月");
+myMap.set("初三", "1_m3.png,峨眉新月");
+myMap.set("初四", "1_m4.png,蛾眉月");
+myMap.set("初五", "1_m5.png,夕月");
+myMap.set("初六", "1_m6.png,上弦月");
+myMap.set("初七", "1_m7.png,上弦月");
+myMap.set("初八", "1_m8.png,九夜月");
+myMap.set("初九", "1_m9.png,宵月");
+myMap.set("初十", "1_m10.png,宵月");
+myMap.set("十一", "1_m11.png,宵月");
+myMap.set("十二", "1_m12.png,渐盈凸月");
+myMap.set("十三", "1_m14.png,小望月");
+myMap.set("十四", "1_m15.png,满月");
+myMap.set("十五", "1_m16.png,既望月");
+myMap.set("十六", "1_m17.png,立待月");
+myMap.set("十七", "1_m19.png,居待月");
+myMap.set("十八", "1_m20.png,寝待月");
+myMap.set("十九", "1_m21.png,更待月");
+myMap.set("二十", "1_m22.png,渐亏凸月");
+myMap.set("廿一", "1_m23.png,下弦月");
+myMap.set("廿二", "1_m24.png,下弦月");
+myMap.set("廿三", "1_m25.png,有明月");
+myMap.set("廿四", "1_m26.png,有明月");
+myMap.set("廿五", "1_m27.png,峨眉残月");
+myMap.set("廿六", "1_m28.png,峨眉残月");
+myMap.set("廿七", "1_m29.png,残月");
+myMap.set("廿八", "1_m30.png,晓月");
+myMap.set("廿九", "1_m31.png,晓月");
+myMap.set("三十", "1_m0.png,晦月");

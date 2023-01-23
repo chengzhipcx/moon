@@ -1,0 +1,42 @@
+{
+  "configVersion": "v2",
+  "app": {
+    "appId": 1016261,
+    "appName": "月相",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "1.0.1"
+    },
+    "icon": "icon.png",
+    "vender": "zepp",
+    "description": "月相小程序"
+  },
+  "permissions": [],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "1.0.0",
+      "target": "1.0.1",
+      "minVersion": "1.0.0"
+    }
+  },
+  "targets": {
+    "smart-band-7": {
+      "module": {
+        "page": {
+          "pages": [
+            "page/index"
+          ]
+        }
+      },
+      "platforms": [
+        {
+          "name": "smart-band-7",
+          "deviceSource": 252
+        }
+      ],
+      "designWidth": 480
+    }
+  },
+  "defaultLanguage": "zh-CN"
+}
