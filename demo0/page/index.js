@@ -4,97 +4,79 @@ import { TextByLine } from "./textByLine"
 import * as draw from "./draw"
 
 const logger = DeviceRuntimeCore.HmLogger.getLogger('helloworld')
-
+function getData(year_int, month_int, day_int) {
+  date = lunar.sloarToLunar(year_int, month_int, day_int)
+  const dateStr = date.lunarMonth + "月" + date.lunarDay
+  const imgsrc = data.myMap.get(date.lunarDay).split(",")[0]
+  const imgtext = data.myMap.get(date.lunarDay).split(",")[1]
+  return {
+    dateStr: dateStr,
+    imgsrc: imgsrc,
+    imgtext: imgtext
+  }
+}
 
 Page({
 
   build() {
     var year = 2023, month = 1, day = 19
-    var date = null
+    //小米手环传感器获取当前日期  1.0api中有获取日历的方法  但是拿到的是undefinde
     const time = hmSensor.createSensor(hmSensor.id.TIME)
     logger.info(time.day)
     year = time.year
     month = time.month
     day = time.day
-    date = lunar.sloarToLunar(year, month, day)
-    logger.info(date.lunarDay)
-    var dateStr = date.lunarMonth + "月" + date.lunarDay
-    var imgsrc = data.myMap.get(date.lunarDay).split(",")[0]
-    var imgtext = data.myMap.get(date.lunarDay).split(",")[1]
-    logger.info(imgsrc)
-    var text1 = new TextByLine({
-      text: imgtext,
-      y: 200,
-      w: 194,
-      h: 46,
-      size:32
-    }).render();
-    const text0 = hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 0,
+    const date = getData(year, month, day)
+
+    const up_text = new TextByLine({
+      text: '▲',
       y: 30,
       w: 194,
       h: 30,
-      color: 0xffffff,
-      text_size: 30,
-      align_h: hmUI.align.CENTER_H,
-      align_v: hmUI.align.CENTER_V,
-      text_style: hmUI.text_style.NONE,
-      text: '▲'
+      size: 30
+    }).render()
+    up_text.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
+      day = day - 1
+      const date = getData(year, month, day)
+      draw.up(date.imgsrc, date.imgtext, date.dateStr)
     })
-    text0.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
-      day=day-1
-      date = lunar.sloarToLunar(year, month,day )
-      dateStr = date.lunarMonth + "月" + date.lunarDay
-      imgsrc = data.myMap.get(date.lunarDay).split(",")[0]
-      imgtext = data.myMap.get(date.lunarDay).split(",")[1]
-      draw.up(imgsrc,imgtext,dateStr)
-    })
-
-
-
-
-
     //根据农历的日期绘制图片
-    var img = hmUI.createWidget(hmUI.widget.IMG, {
+    hmUI.createWidget(hmUI.widget.IMG, {
       x: 70,
       y: 100,
       w: 454,
       h: 454,
-      src: imgsrc
+      src: date.imgsrc
     })
-    var text = new TextByLine({
-      text: dateStr,
+    //月相类型
+    new TextByLine({
+      text: date.imgtext,
+      y: 200,
+      w: 194,
+      h: 46,
+      size: 32
+    }).render();
+    // 绘制农历日期文本
+    new TextByLine({
+      text: date.dateStr,
       y: 260,
       w: 194,
       h: 92,
       size: 42
     }).render()
-
-    const text2 = hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 0,
+    const down_text = new TextByLine({
+      text: '▼',
       y: 360,
       w: 194,
       h: 46,
-      color: 0xffffff,
-      text_size: 30,
-      align_h: hmUI.align.CENTER_H,
-      align_v: hmUI.align.CENTER_V,
-      text_style: hmUI.text_style.NONE,
-      text: '▼'
-    })
-    text2.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
+      size: 30
+    }).render()
+    down_text.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
       logger.info('-1')
-      day = day+1
-      date = lunar.sloarToLunar(year, month,day)
-      logger.info(day) 
-      dateStr = date.lunarMonth + "月" + date.lunarDay
-      logger.info(dateStr)
-      imgsrc = data.myMap.get(date.lunarDay).split(",")[0]
-      logger.info(imgsrc)
-      imgtext = data.myMap.get(date.lunarDay).split(",")[1]
-      logger.info(imgtext)
+      day = day + 1
+      const date = getData(year, month, day)
       //TODO 这个方法 上翻可以  下翻只能一次 还会失效
-      // draw.up(imgsrc,imgtext,dateStr)
+      draw.up(date.imgsrc, date.imgtext, date.dateStr)
     })
 
   }
