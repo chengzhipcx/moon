@@ -3,6 +3,8 @@ import * as data from "./data.js"
 import { TextByLine } from "./textByLine"
 import * as draw from "./draw"
 
+//小米手环7 DeviceSource 260
+
 const logger = DeviceRuntimeCore.HmLogger.getLogger('helloworld')
 function getData(year_int, month_int, day_int) {
   date = lunar.sloarToLunar(year_int, month_int, day_int)
@@ -80,7 +82,7 @@ Page({
       text: '▼',
       y: 360,
       w: 194,
-      h: 46,
+      h: 30,
       size: 30
     }).render()
     down_text.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
