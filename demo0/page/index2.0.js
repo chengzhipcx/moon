@@ -28,7 +28,7 @@ var dateStr_Arr = new Array();
 var imgsrc_Arr = new Array();
 var imgtext_Arr = new Array();
 var count = 11
-
+var pageheight=700
 Page({
     onInit() {
         logger.info("初始化开始")
@@ -47,22 +47,22 @@ Page({
     },
     build() {
         const isVertical = true
-        hmUI.setScrollView(true, px(960), count, isVertical)
+        hmUI.setScrollView(true, pageheight, count, isVertical)
 
         const numArr = Array.from({ length: count }).map((_, index) => index)
 
         numArr.forEach((num) => {
             const up_text = new TextByLine({
                 text: '▲',
-                y: 30+px(960)*num,
+                y: 15+pageheight*num,
                 w: 194,
-                h: 30,
+                h: 40,
                 size: 30
               }).render()
               //根据农历的日期绘制图片
               hmUI.createWidget(hmUI.widget.IMG, {
                 x: 70,
-                y: 100+px(960)*num,
+                y: 100+pageheight*num,
                 w: 454,
                 h: 454,
                 src: imgsrc_Arr[num]
@@ -70,7 +70,7 @@ Page({
               //月相类型
               new TextByLine({
                 text: imgtext_Arr[num],
-                y: 200+px(960)*num,
+                y: 200+pageheight*num,
                 w: 194,
                 h: 46,
                 size: 32
@@ -78,19 +78,20 @@ Page({
               // 绘制农历日期文本
               new TextByLine({
                 text: dateStr_Arr[num],
-                y: 260+px(960)*num,
+                y: 260+pageheight*num,
                 w: 194,
                 h: 92,
                 size: 42
               }).render()
               const down_text = new TextByLine({
                 text: '▼',
-                y: 360+px(960)*num,
+                y: 395+pageheight*num,
                 w: 194,
-                h: 30,
+                h: 40,
                 size: 30
               }).render()
         })
         hmUI.scrollToPage(count/2+1, false)
+        logger.info(px(674))
     }
 })
