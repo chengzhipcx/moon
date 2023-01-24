@@ -15,6 +15,15 @@ function getData(year_int, month_int, day_int) {
     imgtext: imgtext
   }
 }
+function getNextDate(date, day) {
+  var dd = new Date(date);
+  dd.setDate(dd.getDate() + day);
+  var y = dd.getFullYear();
+  var m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+  var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+  return { year: y, month: m, day: d }
+};
+
 
 Page({
 
@@ -36,7 +45,10 @@ Page({
       size: 30
     }).render()
     up_text.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
-      day = day - 1
+      const up = getNextDate(year + "-" + month + "-" + day, -1)
+      year = up.year
+      month = up.month
+      day = up.day
       const date = getData(year, month, day)
       draw.up(date.imgsrc, date.imgtext, date.dateStr)
     })
@@ -72,8 +84,10 @@ Page({
       size: 30
     }).render()
     down_text.addEventListener(hmUI.event.CLICK_DOWN, (info) => {
-      logger.info('-1')
-      day = day + 1
+      const up = getNextDate(year + "-" + month + "-" + day, 1)
+      year = up.year
+      month = up.month
+      day = up.day
       const date = getData(year, month, day)
       //TODO 这个方法 上翻可以  下翻只能一次 还会失效
       draw.up(date.imgsrc, date.imgtext, date.dateStr)
